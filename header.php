@@ -81,17 +81,19 @@
 
                     <?php $halamanAktif = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
                     foreach ($menu as $men) {
-                        if (!isset($men['admin']) || (isset($men['admin']) && is_admin())) {
-                            $u = (strpos($halamanAktif, $men["url"]) === 0); ?>
-                            <a href="<?= $men['url'] ?>" class="sidebar-item <?= $u ? 'active' : '' ?>">
-                                <div class="mr-3 ikon">
-                                    <i class="<?= $men['icon'] ?>"></i>
-                                </div>
-                                <div>
-                                    <?= $men['label'] ?>
-                                </div>
-                            </a>
-                        <?php }
+                        if (!has_akses($men['akses'] ?? [])) {
+                            continue;
+                        }
+                        $u = (strpos($halamanAktif, $men["url"]) === 0); ?>
+                        <a href="<?= $men['url'] ?>" class="sidebar-item <?= $u ? 'active' : '' ?>">
+                            <div class="mr-3 ikon">
+                                <i class="<?= $men['icon'] ?>"></i>
+                            </div>
+                            <div>
+                                <?= $men['label'] ?>
+                            </div>
+                        </a>
+                        <?php
                     } ?>
 
                 </div>

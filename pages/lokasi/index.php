@@ -1,7 +1,7 @@
 <?php
 $label = 'Daftar Lokasi';
 include_once "../../header.php";
-if (!is_admin()) {
+if (!has_akses(['admin'])) {
     echo "<script>window.location='" . base_url() . "'</script>";
 }
 
