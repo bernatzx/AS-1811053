@@ -1,10 +1,6 @@
 <!-- ini untuk menampilkan login -->
 <!-- sekalian dia tangani logika backend -->
 
-<!-- barusan ngn p wa masuk blng ngn su lia sur punya -->
-
-
-
 <?php require_once '../../config.php';
 if (valid()) {
     echo "<script>window.location='" . base_url() . "'</script>";
@@ -30,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $err = "Gagal Login | Data tidak valid!";
         }
     } else {
-        $sql = mysqli_query($db, "SELECT * FROM tb_user WHERE username = '$user' AND password = '$encpass' AND level = 'user'") or die(mysqli_error($db));
+        $sql = mysqli_query($db, "SELECT * FROM tb_user WHERE username = '$user' AND password = '$encpass' AND level = '$level'") or die(mysqli_error($db));
         if (mysqli_num_rows($sql) > 0) {
             $_SESSION['valid'] = true;
             $_SESSION['data'] = mysqli_fetch_assoc($sql);
@@ -102,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <option value="" disabled selected>Level</option>
                         <option value="admin">Admin</option>
                         <option value="user">User</option>
+                        <option value="pemilik-toko">Pemilik Toko</option>
                     </select>
                 </div>
             </div>
