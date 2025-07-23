@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = trim(mysqli_real_escape_string($db, $_POST['username']));
     $pass = trim(mysqli_real_escape_string($db, $_POST['password']));
     $konfpass = trim(mysqli_real_escape_string($db, $_POST['konfpass']));
+    $level = trim(mysqli_real_escape_string($db, $_POST['level']));
 
     if ($pass == $konfpass) {
         $cekemail = mysqli_query($db, "SELECT * FROM tb_user WHERE email = '$email'") or die(mysqli_error($db));
@@ -16,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $err = "Email telah digunakan!";
         } else {
             $encpass = sha1($pass);
-            mysqli_query($db, "INSERT INTO tb_user (username, password, email, nama, level) VALUES ('$user', '$encpass', '$email', '$nama', 'user')") or die(mysqli_error($db));
+            mysqli_query($db, "INSERT INTO tb_user (username, password, email, nama, level) VALUES ('$user', '$encpass', '$email', '$nama', '$level')") or die(mysqli_error($db));
 
             echo "<script>window.location='" . base_url() . "'</script>";
             exit();
@@ -92,6 +93,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="input-group-addon"><i class="fas fa-lock"></i></div>
                     <input class="form-control" type="password" placeholder="Konfirmasi password" name="konfpass" id=""
                         required>
+                </div>
+                <div class="d-flex gap-2">
+                    <select class="form-control" name="level" required>
+                        <option value="" disabled selected>Level</option>
+                        <option value="user">User</option>
+                        <option value="pemilik-toko">Pemilik Toko</option>
+                    </select>
                 </div>
             </div>
 
