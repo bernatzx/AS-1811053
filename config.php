@@ -19,11 +19,16 @@ $menu = [
     ['label' => 'Dashboard', 'url' => base_url('pages/dashboard/'), 'icon' => 'fas fa-gauge'],
     ['label' => 'Lihat Peta', 'url' => base_url('pages/peta/'), 'icon' => 'fas fa-map-pin'],
     ['label' => 'Daftar Lokasi', 'url' => base_url('pages/lokasi/'), 'icon' => 'fas fa-list', 'admin' => true],
+    ['label' => 'Lihat Toko', 'url' => base_url('pages/toko/'), 'icon' => 'fas fa-shop', 'pemilik-toko' => true],
     ['label' => 'Profil', 'url' => base_url('pages/profil/'), 'icon' => 'fas fa-user-pen']
 ];
 function valid()
 {
     return isset($_SESSION['valid']) && $_SESSION['valid'] === true;
+}
+function pemilik_toko()
+{
+    return valid() && $_SESSION['data']['level'] === 'pemilik-toko';
 }
 function is_admin()
 {
