@@ -30,9 +30,18 @@ function user_level()
 {
     return valid() ? $_SESSION['data']['level'] : null;
 }
-
 function has_akses($akses = [])
 {
     if (!valid()) return false;
-    return in_array(user_level(), (array) $akses);
+    $level = user_level();
+    if (empty(($akses))) {
+        return true;
+    }
+    if ($akses === ['admin'] && $level !== 'admin') {
+        return false;
+    }
+    if ($akses === ['pemilik-toko'] && $level !== 'pemilik-toko') {
+        return false;
+    }
+    return in_array($level, $akses);
 }
