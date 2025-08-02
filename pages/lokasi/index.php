@@ -39,9 +39,6 @@ $sql_lokasi = mysqli_query($db, $query) or die(mysqli_error($db));
                 <button class="btn" type="submit"><i class="fas fa-magnifying-glass"></i></button>
             </div>
         </form>
-        <div>
-            <a href="add.php" class="btn btn-sm btn-info">+ Tambah Data</a>
-        </div>
     </div>
 </div>
 <div class="table-responsive">
