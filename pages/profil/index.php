@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <h4><?= $label ?></h4>
 <form class="profil-form" method="post">
-    <input type="hidden" name="id" value="<?= $_SESSION['data']['id_user'] ?>">
+    <input type="hidden" name="id" value="<?= array_values($_SESSION['data'])[0] ?>">
     <div class="d-flex gap-4 groupnya">
         <div class="inputan">
             <div class="input-group-addon"><i class="fas fa-user"></i></div>
@@ -34,7 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
     <div class="mt-3">
-        <input onclick="return confirm('Anda yakin untuk diubah profilnya?')" type="submit" class="py-2 px-4 btn btn-info btn-sm" value="Ubah">
+        <input onclick="return confirm('Anda yakin untuk diubah profilnya?')" type="submit"
+            class="py-2 px-4 btn btn-info btn-sm" value="Ubah">
     </div>
 </form>
 
