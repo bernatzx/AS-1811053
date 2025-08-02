@@ -7,13 +7,13 @@ if (!has_akses(['pemilik-toko'])) {
     echo "<script>window.location='" . base_url() . "'</script>";
 }
 $ada = false;
-$id = $_SESSION['data']['id_lokasi'];
-if ($id == 0) {
+$id = $_SESSION['data']['id_user'];
+$sql = mysqli_query($db, "SELECT * FROM tb_toko JOIN tb_user ON tb_toko.id_user = tb_user.id_user JOIN tb_lokasi ON tb_toko.id_lokasi = tb_lokasi.id_lokasi WHERE tb_toko.id_user = '$id'") or die(mysqli_error($db));
+if (mysqli_num_rows($sql)> 0) {
+    $data = mysqli_fetch_assoc($sql); 
     $ada = true;
 }
-
-$sql = mysqli_query($db, "SELECT * FROM tb_lokasi WHERE id_lokasi = '$id'") or die(mysqli_error($db));
-$data = mysqli_fetch_assoc($sql); ?>
+?>
 
 <div class="d-flex justify-content-between">
     <div>
@@ -46,16 +46,16 @@ $data = mysqli_fetch_assoc($sql); ?>
         </div>
         <div class="row mb-2">
             <div class="col-4">Latitude</div>
-            <input class="col-7 form-control" type="text" name="latti" value=<?= $data['latti'] ?? '-' ?>>
+            <input class="col-7 form-control" type="number" name="latti" value=<?= $data['latitude'] ?? '-' ?>>
         </div>
         <div class="row mb-2">
             <div class="col-4">Longitude</div>
-            <input class="col-7 form-control" type="text" name="longi" value=<?= $data['longi'] ?? '-' ?>>
+            <input class="col-7 form-control" type="number" name="longi" value=<?= $data['longitude'] ?? '-' ?>>
         </div>
 
 
         <?php
-        if ($ada) { ?>
+        if (!$ada) { ?>
             <div class="d-flex border-bottom mb-3">
                 <div class="d-flex flex-column">
                     <span style="font-size: 1.50rem;">Gambar</span>
